@@ -5,6 +5,10 @@ namespace Task\Model;
 use Laminas\InputFilter\InputFilter;
 use Laminas\InputFilter\InputFilterAwareInterface;
 use Laminas\InputFilter\InputFilterInterface;
+use Laminas\Filter\StringTrim;
+use Laminas\Filter\StripTags;
+use Laminas\Filter\ToInt;
+use Laminas\Validator\StringLength;
 
 class Task implements InputFilterAwareInterface
 {
@@ -42,16 +46,47 @@ class Task implements InputFilterAwareInterface
         $inputFilter->add([
             'name' => 'title',
             'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+            ],
+            'validators' => [
+                [
+                    'name' => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min' => 3,
+                        'max' => 50,
+                    ],
+                ],
+            ],
         ]);
 
         $inputFilter->add([
             'name' => 'description',
             'required' => false,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+            ],
+            'validators' => [
+                [
+                    'name' => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min' => 5,
+                        'max' => 100,
+                    ],
+                ],
+            ],
         ]);
 
         $inputFilter->add([
             'name' => 'status',
             'required' => false,
+            'filters' => [
+                ['name' => ToInt::class],
+            ],
         ]);
 
         $this->inputFilter = $inputFilter;
