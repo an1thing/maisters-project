@@ -1,0 +1,38 @@
+<?php
+    /**
+     * dateTime
+     * 
+     * @param datetime $dateTime
+     * @return mixed
+     */
+    function dateTime($datetime)
+    {
+        $datetimeexploded = explode(" ", $datetime);
+        $dateexploded = explode("-", $datetimeexploded[0]);
+        return "{$dateexploded[2]}/{$dateexploded[1]}/{$dateexploded[0]} às {$datetimeexploded[1]}";
+    }
+?>
+
+<h1>Tasks</h1>
+<p><a href="<?= $this->url('task', ['action' => 'add']) ?>">Add new task</a></p>
+
+<table class="table">
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Creation data</th>
+        <th>Status</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($tasks as $task) { ?>
+        <tr>
+            <td><?= $this->escapeHtml($task->title) ?></td>
+            <td><?= $this->escapeHtml($task->description) ?></td>
+            <td><?= ($task->creation_date) ? dateTime($task->creation_date) : null ?></td>
+            <td><?= ($task->status == 1) ? 'COMPLETE' : 'PENDING' ?></td>
+            <td><a href="<?= $this->url('task', ['action' => 'edit', 'id' => $task->id]) ?>">Edit</a></td>
+            <td><a href="<?= $this->url('task', ['action' => 'delete', 'id' => $task->id]) ?>">Delete</a></td>
+        </tr>
+    <?php } ?>
+</table>

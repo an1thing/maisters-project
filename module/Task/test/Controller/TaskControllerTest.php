@@ -22,6 +22,7 @@ class TaskControllerTest extends AbstractHttpControllerTestCase
             '/task',
             'GET'
         );
+        $this->assertResponseStatusCode(200);
     }
 
     public function testStoreAction(): void
@@ -34,14 +35,7 @@ class TaskControllerTest extends AbstractHttpControllerTestCase
                 'description' => 'this is a test where im storing data',
             ]
         );
-    }
-
-    public function testShowAction(): void
-    {
-        $this->dispatch(
-            '/task/show/1',
-            'GET'
-        );
+        $this->assertResponseStatusCode(302);
     }
 
     public function testUpdateAction(): void
@@ -55,13 +49,15 @@ class TaskControllerTest extends AbstractHttpControllerTestCase
                 'status' => 1,
             ]
         );
+        $this->assertResponseStatusCode(302);
     }
 
     public function testDeleteAction(): void
     {
         $this->dispatch(
-            '/task/delete/4',
+            '/task/delete/12',
             'DELETE'
         );
+        $this->assertResponseStatusCode(302);
     }
 }

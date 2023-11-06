@@ -25,6 +25,17 @@ class Task implements InputFilterAwareInterface
         $this->title = !empty($data['title']) ? $data['title'] : null;
         $this->description = !empty($data['description']) ? $data['description'] : null;
         $this->status = !empty($data['status']) ? $data['status'] : 0;
+        $this->creation_date = !empty($data['creation_date']) ? $data['creation_date'] : null;
+    }
+
+    public function getArrayCopy()
+    {
+        return [
+            'id' => $this->id,
+            'title' => $this->title,
+            'description' => $this->description,
+            'status' => $this->status,
+        ];
     }
 
     public function setInputFilter(InputFilterInterface $inputFilter)
