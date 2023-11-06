@@ -55,7 +55,7 @@ class TaskControllerTest extends AbstractHttpControllerTestCase
     public function testDeleteAction(): void
     {
         $this->dispatch(
-            '/task/delete/12',
+            '/task/delete/1',
             'DELETE'
         );
         $this->assertResponseStatusCode(302);

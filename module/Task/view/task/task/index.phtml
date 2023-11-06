@@ -14,9 +14,9 @@
 ?>
 
 <h1>Tasks</h1>
-<p><a href="<?= $this->url('task', ['action' => 'add']) ?>">Add new task</a></p>
+<p><a class="btn btn-meister" href="<?= $this->url('task', ['action' => 'add']) ?>">Add new task</a></p>
 
-<table class="table">
+<table class="table table-meister">
     <tr>
         <th>Title</th>
         <th>Description</th>
@@ -31,8 +31,26 @@
             <td><?= $this->escapeHtml($task->description) ?></td>
             <td><?= ($task->creation_date) ? dateTime($task->creation_date) : null ?></td>
             <td><?= ($task->status == 1) ? 'COMPLETE' : 'PENDING' ?></td>
-            <td><a href="<?= $this->url('task', ['action' => 'edit', 'id' => $task->id]) ?>">Edit</a></td>
-            <td><a href="<?= $this->url('task', ['action' => 'delete', 'id' => $task->id]) ?>">Delete</a></td>
+            <td><a class="btn btn-meister" href="<?= $this->url('task', ['action' => 'edit', 'id' => $task->id]) ?>">Edit</a></td>
+            <td><a class="btn btn-meister danger" onclick="cancel(<?= $task->id ?>)">Delete</a></td>
         </tr>
     <?php } ?>
 </table>
+
+<script>
+    function cancel(taskId) {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href="task/delete/"+taskId
+            }
+        });
+    }
+</script>

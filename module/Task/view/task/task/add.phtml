@@ -1,6 +1,8 @@
 <h1>New task</h1>
-<form class="form-horizontal" action="<?= $this->url('task', ['action' => 'store']) ?>" method="POST">
+<form class="form-horizontal form-meister" action="<?= $this->url('task', ['action' => 'store']) ?>" method="POST">
     <input class="form-control" type="text" name="title" minlength="3" maxlength="50" value="" placeholder="Title..." required>
     <textarea class="form-control" name="description" minlength="5" maxlength="100" placeholder="Description..."></textarea>
-    <button type="submit" class="btn">Send</button>
+    
+    <a href="<?= $this->url('task') ?>" class="btn btn-meister danger">Cancel</a>
+    <button type="submit" class="btn btn-meister">Send</button>
 </form>
