@@ -1,5 +1,5 @@
 <h1>Update task</h1>
-<form class="form-horizontal" action="<?= $this->url('task', ['action' => 'update', 'id' => $task->id]) ?>" method="POST">
+<form class="form-horizontal form-meister" action="<?= $this->url('task', ['action' => 'update', 'id' => $task->id]) ?>" method="POST">
     <input class="form-control" type="hidden" name="id" value="<?= $task->id ?>">
     <input class="form-control" type="text" name="title" minlength="3" maxlength="50" value="<?= $task->title ?>" required>
     <select class="form-control" name="status" required>
@@ -7,7 +7,7 @@
         <option value="1" <?= ($task->status == 1) ? 'selected' : '' ?>>COMPLETE</option>
     </select>
     <textarea class="form-control" name="description" minlength="5" maxlength="100" placeholder="Description..."><?= $task->description ?></textarea>
-    <button type="submit" class="btn">Update</button>
+    
+    <a href="<?= $this->url('task') ?>" class="btn btn-meister danger">Cancel</a>
+    <button type="submit" class="btn btn-meister">Update</button>
 </form>
-
-<a href="<?= $this->url('task') ?>" class="btn">Back</a>

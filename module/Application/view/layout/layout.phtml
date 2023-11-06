@@ -44,7 +44,7 @@
                             <a
                                 class="nav-link active"
                                 aria-current="page"
-                                href="<?= $this->url('task') ?>"
+                                href="<?= $this->url('home') ?>"
                             >Home
                             </a>
                         </li>
@@ -59,7 +59,7 @@
                 <p>&copy; <?= date('Y') ?> Meisters test project.</p>
             </footer>
         </div>
-        <?= $this->inlineScript()
-            ->prependFile($this->basePath('js/bootstrap.min.js')) ?>
+        <?= $this->inlineScript()->prependFile($this->basePath('js/bootstrap.min.js')) ?>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </body>
 </html>

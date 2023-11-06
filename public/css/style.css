@@ -6,7 +6,39 @@
     background-color: var(--brand-color);
 }
 
+.form-meister input,
+.form-meister textarea,
+.form-meister select {
+    border-radius: 0;
+    margin-bottom: 15px;
+}
+
 .btn-primary {
     background-color: var(--brand-color);
     border-color: var(--brand-color);
+}
+
+.btn-meister {
+    border: 1px solid #013755;
+    border-radius: 0;
+}
+
+.btn-meister:hover {
+    background: #013755;
+    color: #ffffff;
+}
+
+.btn-meister.danger {
+    background: red;
+    color: #ffffff;
+    border: 1px solid red;
+}
+
+.btn-meister.danger:hover {
+    background: #ffffff;
+    color: red;
+}
+
+.table-meister tr td {
+    vertical-align: middle;
 }
