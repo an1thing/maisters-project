@@ -5,9 +5,10 @@ namespace Task\Controller;
 use Task\Form\TaskForm;
 use Task\Model\Task;
 use Task\Model\TaskTable;
-use Laminas\Mvc\Controller\AbstractActionController;
+use Laminas\Mvc\Controller\AbstractRestfulController;
+use Laminas\View\Model\ViewModel;
 
-class TaskController extends AbstractActionController
+class TaskController extends AbstractRestfulController
 {
     private $table;
 
@@ -21,7 +22,15 @@ class TaskController extends AbstractActionController
      */
     public function indexAction()
     {
-        $this->table->get();
+        return new ViewModel(['tasks' => $this->table->get()]);
+    }
+
+    /**
+     * add task
+     */
+    public function addAction()
+    {
+        return new ViewModel(['task']);
     }
 
     /**
@@ -43,15 +52,24 @@ class TaskController extends AbstractActionController
 
         $task->exchangeArray($form->getData());
         $this->table->store($task);
+
+        return $this->redirect()->toRoute('task');
     }
 
     /**
-     * show task
+     * edit task
      */
-    public function showAction()
+    public function editAction()
     {
         $id = $this->params()->fromRoute('id', 0);
-        $this->table->show($id);
+
+        try {
+            $task = $this->table->show($id);
+        } catch (\Exception $e) {
+            $this->redirect()->toRoute('task');
+        }
+
+        return new ViewModel(['task' => $task]);
     }
 
     /**
@@ -75,6 +93,8 @@ class TaskController extends AbstractActionController
 
         $task->exchangeArray($form->getData());
         $this->table->update($task, $id);
+
+        return $this->redirect()->toRoute('task');
     }
 
     /**
@@ -84,5 +104,7 @@ class TaskController extends AbstractActionController
     {
         $id = $this->params()->fromRoute('id', 0);
         $this->table->delete($id);
+
+        return $this->redirect()->toRoute('task');
     }
 }
